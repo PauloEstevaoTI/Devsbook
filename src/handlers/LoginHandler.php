@@ -32,11 +32,37 @@ class LoginHandler {
 
         if($user){
             if(password_verify($password, $user['password'])){
-                $token = md5(time().rand);
+                $token = bin2hex(random_bytes(32)); // gera um token aleatório
+
+                User::update()
+                    ->set('token', $token)
+                    ->where('email', $email)
+                ->execute();
+
                 return $token;
             }
         }
 
         return false;
+    }
+
+    public static function emailExists($email){
+        $user = User::select()->where('email', $email)->one();
+        return $user ? true : false;
+    }
+
+    public static function addUser($name, $email, $password, $birthdate){
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $token = bin2hex(random_bytes(32));
+
+        User::insert([
+            'email' => $email,
+            'password' => $hash,
+            'name' => $name,
+            'birthday' => $birthdate,           
+            'token' => $token
+        ])->execute();
+
+        return $token;
     }
 }
