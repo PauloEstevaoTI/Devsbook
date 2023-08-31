@@ -6,6 +6,7 @@ class User extends Model {
     private $id;
     private $email;
     private $name;
+    private $avatar;
 
     public function setId($id){
         $this->id = $id;
@@ -29,6 +30,14 @@ class User extends Model {
 
     public function getName(){
         return $this->name;
+    }
+
+    public function setAvatar($avatar){
+        $this->avatar = $avatar;
+    }
+
+    public function getAvatar(){
+        return $this->avatar;
     }
 
 }

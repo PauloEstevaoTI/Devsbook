@@ -67,7 +67,7 @@ class LoginController extends Controller {
 
       $flash = '';
 
-      echo 'Nome: '.$name.' Email: '.$email.' Password: '.$password.' Birthdate: '.$birthdate;
+      //echo 'Nome: '.$name.' Email: '.$email.' Password: '.$password.' Birthdate: '.$birthdate;
 
       if($name && $email && $password && $birthdate){
 
